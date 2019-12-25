@@ -1,15 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ParkingLot.ConsoleApp.Executors
 {
-    public class CommandLineExecutor : BaseExecutor
+    internal class CommandLineExecutor : BaseExecutor
     {
         #region Member of BaseExecutor
-        public override void Execute()
+        internal override void Execute()
         {
-            throw new NotImplementedException();
+            try
+            {
+                while (true)
+                {
+                    string input = Console.ReadLine();
+
+                    // if user type "exit", then close this Command Line Interface
+                    if (input.Equals("exit", StringComparison.CurrentCultureIgnoreCase))
+                        return;
+
+                    base.Execute(input);
+                }
+            }
+            catch (Exception execption)
+            {
+                Console.WriteLine(execption.Message);
+            }
         }
         #endregion
     }

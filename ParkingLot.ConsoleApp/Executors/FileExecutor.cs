@@ -1,8 +1,9 @@
 ﻿using System;
+using System.IO;
 
 namespace ParkingLot.ConsoleApp.Executors
 {
-    public class FileExecutor : BaseExecutor
+    internal class FileExecutor : BaseExecutor
     {
         #region Private Field
         private readonly string _filePath;
@@ -16,9 +17,21 @@ namespace ParkingLot.ConsoleApp.Executors
         #endregion
 
         #region Member of BaseExecutor
-        public override void Execute()
+        internal override void Execute()
         {
-            throw new NotImplementedException();
+            try
+            {
+                using StreamReader file = new StreamReader(_filePath);
+                string input;
+                while ((input = file.ReadLine()) != null)
+                {
+                    base.Execute(input);
+                }
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
         }
         #endregion
     }

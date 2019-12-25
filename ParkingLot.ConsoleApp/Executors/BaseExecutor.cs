@@ -1,7 +1,21 @@
-﻿namespace ParkingLot.ConsoleApp.Executors
+﻿using System;
+
+namespace ParkingLot.ConsoleApp.Executors
 {
-    public abstract class BaseExecutor
+    internal abstract class BaseExecutor
     {
-        public abstract void Execute();
+        internal abstract void Execute();
+
+        internal void Execute(string input)
+        {
+            try
+            {
+
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine($"{exception.Message}");
+            }
+        }
     }
 }
