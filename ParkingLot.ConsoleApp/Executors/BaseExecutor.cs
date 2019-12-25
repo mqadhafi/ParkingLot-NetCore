@@ -10,7 +10,13 @@ namespace ParkingLot.ConsoleApp.Executors
         {
             try
             {
+                string[] arguments = input.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                string carRegistrationNumber;
+                string carColour;
 
+                switch (arguments[0])
+                {
+                }
             }
             catch (Exception exception)
             {
