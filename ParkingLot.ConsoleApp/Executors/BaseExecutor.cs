@@ -1,26 +1,33 @@
 ﻿using System;
+using ParkingLot.ConsoleApp.Exceptions;
+using ParkingLot.ConsoleApp.Validators;
 
 namespace ParkingLot.ConsoleApp.Executors
 {
     internal abstract class BaseExecutor
     {
+        private readonly CommandValidator _validator = new CommandValidator();
+
         internal abstract void Execute();
 
-        internal void Execute(string input)
+        internal void Execute(string command)
         {
             try
             {
-                string[] arguments = input.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                if (!_validator.IsValid(command))
+                    throw new ParkingLotCommandException("Please enter a valid command");
+
+                string[] commands = command.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 string carRegistrationNumber;
                 string carColour;
 
-                switch (arguments[0])
+                switch (commands[0])
                 {
                 }
             }
-            catch (Exception exception)
+            catch (ParkingLotException exception)
             {
-                Console.WriteLine($"{exception.Message}");
+                Console.WriteLine(exception.Message);
             }
         }
     }

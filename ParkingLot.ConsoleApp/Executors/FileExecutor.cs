@@ -10,7 +10,7 @@ namespace ParkingLot.ConsoleApp.Executors
         #endregion
 
         #region Constructor
-        public FileExecutor(string filePath)
+        internal FileExecutor(string filePath)
         {
             _filePath = filePath;
         }
@@ -21,11 +21,11 @@ namespace ParkingLot.ConsoleApp.Executors
         {
             try
             {
-                using StreamReader file = new StreamReader(_filePath);
-                string input;
-                while ((input = file.ReadLine()) != null)
+                using StreamReader streamReader = new StreamReader(_filePath);
+                string command;
+                while ((command = streamReader.ReadLine()) != null)
                 {
-                    base.Execute(input);
+                    base.Execute(command);
                 }
             }
             catch (Exception exception)

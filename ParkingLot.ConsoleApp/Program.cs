@@ -14,7 +14,7 @@ namespace ParkingLot.ConsoleApp
             if (args?.Length > 0)
                 executor = new FileExecutor(args[0]);
             else
-                executor = new CommandLineExecutor();
+                executor = new CLIExecutor();
 
             // execute!
             executor.Execute();
