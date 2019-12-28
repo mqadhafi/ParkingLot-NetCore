@@ -18,7 +18,7 @@ namespace ParkingLot.ConsoleApp.Executors
             try
             {
                 if (!_validator.IsValid(command))
-                    throw new ParkingLotCommandException("Please enter a valid command");
+                    throw new ParkingLotCommandException();
 
                 string[] commands = command.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 int slot = 0;

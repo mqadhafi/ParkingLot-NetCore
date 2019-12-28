@@ -4,7 +4,7 @@ namespace ParkingLot.Model.Exceptions
 {
     public class ParkingLotCommandException : ParkingLotException
     {
-        public ParkingLotCommandException()
+        public ParkingLotCommandException() : base("Please enter a valid command")
         {
         }
 

@@ -21,10 +21,9 @@ namespace ParkingLot.Business
         public int Park(string plateNumber, string color)
         {
             if (Array.IndexOf(_slots, plateNumber) > -1)
-                throw new ParkingLotCommandException("Same vehicle already exist");
+                throw new ParkingLotVehicleExistException();
 
             int slot = 0;
-
             for (int i = 0; i < _slots.Length; i++)
             {
                 if (string.IsNullOrWhiteSpace(_slots[i]))
@@ -39,7 +38,6 @@ namespace ParkingLot.Business
                     break;
                 }
             }
-
             return slot;
         }
 
@@ -71,11 +69,8 @@ namespace ParkingLot.Business
 
         public string GetPlateNumberByColor(string color)
         {
-            IEnumerable<string> platNumbers = _vehicles.Values
-                .Where(x => x.Colour.Equals(color, StringComparison.CurrentCultureIgnoreCase))
-                .Select(x => x.PlateNumber);
-
-            return platNumbers?.Any() == true ? string.Join(", ", platNumbers) : null;
+            IEnumerable<Vehicle> vehicles = _vehicles.Values.Where(x => x.Colour.Equals(color, StringComparison.CurrentCultureIgnoreCase));
+            return vehicles?.Any() == true ? string.Join(", ", vehicles.Select(x => x.PlateNumber)) : null;
         }
 
         public string GetSlotNumberByColor(string color)
