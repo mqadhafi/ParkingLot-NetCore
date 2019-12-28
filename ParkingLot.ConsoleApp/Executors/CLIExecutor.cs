@@ -3,10 +3,10 @@ using ParkingLot.Model.Exceptions;
 
 namespace ParkingLot.ConsoleApp.Executors
 {
-    internal class CLIExecutor : BaseExecutor
+    public class CLIExecutor : BaseExecutor
     {
         #region Member of BaseExecutor
-        internal override void Execute()
+        public override void Execute()
         {
             try
             {

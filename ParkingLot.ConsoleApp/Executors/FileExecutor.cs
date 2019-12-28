@@ -4,21 +4,21 @@ using ParkingLot.Model.Exceptions;
 
 namespace ParkingLot.ConsoleApp.Executors
 {
-    internal class FileExecutor : BaseExecutor
+    public class FileExecutor : BaseExecutor
     {
         #region Private Field
         private readonly string _filePath;
         #endregion
 
         #region Constructor
-        internal FileExecutor(string filePath)
+        public FileExecutor(string filePath)
         {
             _filePath = filePath;
         }
         #endregion
 
         #region Member of BaseExecutor
-        internal override void Execute()
+        public override void Execute()
         {
             try
             {

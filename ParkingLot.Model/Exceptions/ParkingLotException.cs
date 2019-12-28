@@ -2,17 +2,17 @@
 
 namespace ParkingLot.Model.Exceptions
 {
-    public abstract class ParkingLotException : Exception
+    public class ParkingLotException : Exception
     {
-        protected ParkingLotException()
+        public ParkingLotException()
         {
         }
 
-        protected ParkingLotException(string message) : base(message)
+        public ParkingLotException(string message) : base(message)
         {
         }
 
-        protected ParkingLotException(string message, Exception innerException) : base(message, innerException)
+        public ParkingLotException(string message, Exception innerException) : base(message, innerException)
         {
         }
     }

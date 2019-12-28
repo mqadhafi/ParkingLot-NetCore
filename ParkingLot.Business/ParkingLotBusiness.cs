@@ -15,14 +15,17 @@ namespace ParkingLot.Business
 
         public void Create(int size)
         {
+            if (size <= 0) throw new ParkingLotException("Invalid slot size");
+
             _slots = new string[size];
             _vehicles = new Dictionary<int, Vehicle>();
         }
 
         public int Park(string plateNumber, string color)
         {
-            if (Array.IndexOf(_slots, plateNumber) > -1)
-                throw new ParkingLotVehicleExistException();
+            if (_slots == null) throw new ParkingLotException("You must create parking lot first");
+            if (_slots.Length == _vehicles.Count) throw new ParkingLotException("Sorry, parking lot is full");
+            if (Array.IndexOf(_slots, plateNumber) > -1) throw new ParkingLotException("Same vehicle already exist");
 
             int slot = 0;
             for (int i = 0; i < _slots.Length; i++)
@@ -44,6 +47,10 @@ namespace ParkingLot.Business
 
         public int Leave(int slot)
         {
+            if (slot <= 0) throw new ParkingLotException("The given slot doesn't exist");
+            if (_slots == null) throw new ParkingLotException("You must create parking lot first");
+            if (string.IsNullOrWhiteSpace(_slots[slot - 1])) throw new ParkingLotException("No vehicle found on this slot");
+
             _slots[slot - 1] = null;
             _vehicles.Remove(slot);
 
@@ -71,7 +78,7 @@ namespace ParkingLot.Business
         public string GetPlateNumberByColor(string color)
         {
             IEnumerable<Vehicle> vehicles = _vehicles.Values.Where(x => x.Colour.Equals(color, StringComparison.CurrentCultureIgnoreCase));
-            return vehicles?.Any() == true ? string.Join(", ", vehicles.Select(x => x.PlateNumber)) : null;
+            return vehicles?.Any() == true ? string.Join(", ", vehicles.Select(x => x.PlateNumber)) : throw new ParkingLotException("Not found");
         }
 
         public string GetSlotNumberByColor(string color)
@@ -82,12 +89,17 @@ namespace ParkingLot.Business
                 if (item.Value.Colour.Equals(color, StringComparison.CurrentCultureIgnoreCase))
                     expectedSlots.Add(item.Key);
             }
-            return expectedSlots?.Count > 0 ? string.Join(", ", expectedSlots) : null;
+            return expectedSlots?.Count > 0 ? string.Join(", ", expectedSlots) : throw new ParkingLotException("Not found");
         }
 
         public int GetSlotNumberByPlateNumber(string plateNumber)
         {
-            return Array.IndexOf(_slots, plateNumber) + 1;
+            for (int i = 0; i < _slots.Length; i++)
+            {
+                if (_slots[i].Equals(plateNumber, StringComparison.CurrentCultureIgnoreCase))
+                    return i + 1;
+            }
+            throw new ParkingLotException("Not found");
         }
     }
 }
