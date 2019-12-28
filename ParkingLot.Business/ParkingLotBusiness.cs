@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ParkingLot.Business.Contract;
 using ParkingLot.Model;
 using ParkingLot.Model.Exceptions;
 
 namespace ParkingLot.Business
 {
-    public class ParkingLotBusiness
+    public class ParkingLotBusiness : IParkingLotBusiness
     {
         private string[] _slots;
         private IDictionary<int, Vehicle> _vehicles = new Dictionary<int, Vehicle>();

@@ -1,5 +1,6 @@
 ﻿using System;
 using ParkingLot.Business;
+using ParkingLot.Business.Contract;
 using ParkingLot.ConsoleApp.Validators;
 using ParkingLot.Model;
 using ParkingLot.Model.Exceptions;
@@ -9,7 +10,7 @@ namespace ParkingLot.ConsoleApp.Executors
     internal abstract class BaseExecutor
     {
         private readonly CommandValidator _validator = new CommandValidator();
-        private readonly ParkingLotBusiness _parkingLotBusiness = new ParkingLotBusiness();
+        private readonly IParkingLotBusiness _parkingLotBusiness = new ParkingLotBusiness();
 
         internal abstract void Execute();
 
