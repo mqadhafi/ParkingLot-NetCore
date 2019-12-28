@@ -1,4 +1,5 @@
 ﻿using System;
+using ParkingLot.Model.Exceptions;
 
 namespace ParkingLot.ConsoleApp.Executors
 {
@@ -19,7 +20,7 @@ namespace ParkingLot.ConsoleApp.Executors
                     base.Execute(command);
                 }
             }
-            catch (Exception exception)
+            catch (ParkingLotException exception)
             {
                 Console.WriteLine(exception.Message);
             }
