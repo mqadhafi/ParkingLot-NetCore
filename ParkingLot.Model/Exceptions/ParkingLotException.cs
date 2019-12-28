@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace ParkingLot.ConsoleApp.Exceptions
+namespace ParkingLot.Model.Exceptions
 {
-    internal abstract class ParkingLotException : Exception
+    public abstract class ParkingLotException : Exception
     {
         protected ParkingLotException()
         {

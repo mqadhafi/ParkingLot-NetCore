@@ -3,6 +3,6 @@
     public class Vehicle
     {
         public string Colour { get; set; }
-        public string RegistrationNumber { get; set; }
+        public string PlateNumber { get; set; }
     }
 }
